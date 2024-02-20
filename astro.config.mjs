@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url'
 import htmx from 'astro-htmx';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
-import netlify from '@astrojs/netlify/functions'
+import netlify from '@astrojs/netlify/edge-functions'
 import partytown from '@astrojs/partytown';
 import path from 'path';
 import sitemap from '@astrojs/sitemap';
