@@ -1,0 +1,55 @@
+---
+import { turso, db, foo } from '../turso';
+export const partial = true;
+if (Astro.request.method === 'POST') {
+	const formData = await Astro.request.formData();
+	const prompt = formData.get('prompt').toString();
+	requestId = await startRequest(prompt);
+} else {
+	console.log(Astro.request.method, 'REQ');
+	requestId = Astro.url.searchParams.get('requestId');
+}
+const request = getRequest(requestId);
+
+const { rows } = await turso.execute('SELECT * FROM foo');
+
+const result = await db.select().from(foo).all();
+
+---
+
+<style>
+	.smooth {
+		transition: all 4s ease-in;
+	}
+</style>
+
+<div
+	id='test'
+	class='smooth'
+	style='color:purple'
+	x-data='{ result: []}'
+	x-init='result = await $fetchjson("https://jsonplaceholder.typicode.com/todos/")'
+	hx-get='/prompt'
+	hx-target='this'
+	hx-swap='outerHTML'
+	hx-trigger='load'>
+	<template x-for='item in result' x-if="true">
+		<div
+			x-text='item'
+			:key='item'>
+		</div>
+	</template>
+	<!-- {rows[rows.length - 1].value} -->
+</div>
+
+<script>
+	import { animate } from 'motion';
+
+	const fadeIns = document.querySelectorAll('.fade-in');
+	console.log('########## ', fadeIns);
+	animate(
+		fadeIns,
+		{ opacity: [0, 1] },
+		{ duration: 3000, delay: 1000, easing: 'ease-in-out' }
+	);
+</script>
