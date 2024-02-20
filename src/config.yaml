@@ -1,6 +1,6 @@
 site:
   name: Secure Athlete
-  site: 'https://secureathlete.com'
+  site: 'https://secureathlete.net'
   base: '/'
   trailingSlash: false
 
