@@ -8,7 +8,8 @@ import { fileURLToPath } from 'url'
 import htmx from 'astro-htmx';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
-import netlify from '@astrojs/netlify/functions'
+//import netlify from '@astrojs/netlify/functions'
+import netlify from '@astrojs/netlify';
 import partytown from '@astrojs/partytown';
 import path from 'path';
 import sitemap from '@astrojs/sitemap';
@@ -30,7 +31,8 @@ export default defineConfig({
   trailingSlash: SITE.trailingSlash ? 'always' : 'never',
 
   output: 'server',
-  adapter: netlify({edgeMiddleware: true}),
+  //adapter: netlify({edgeMiddleware: true}),
+  adapter: netlify(),
   prefetch: true,
 
   integrations: [
